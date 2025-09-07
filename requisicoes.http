@@ -2,7 +2,7 @@ GET http://localhost:3333/courses
 
 ###
 
-GET http://localhost:3333/courses/1
+GET http://localhost:3333/courses/fe4f9998-61d5-4f37-bb0b-c5a6b04be57f
 
 ###
 
@@ -10,18 +10,5 @@ POST http://localhost:3333/courses
 Content-Type: application/json
 
 {
-  "title": "Curso Novo"
+  "title": "Curso de Docker"
 }
-
-###
-
-PATCH http://localhost:3333/courses/1
-Content-Type: application/json
-
-{
-  "title": "Título alterado"
-}
-
-###
-
-DELETE http://localhost:3333/courses/1
