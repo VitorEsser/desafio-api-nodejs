@@ -15,6 +15,34 @@
       "when": 1757177734350,
       "tag": "0001_lean_stranger",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1757584565364,
+      "tag": "0002_common_miss_america",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1757588512303,
+      "tag": "0003_stale_callisto",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1757593432933,
+      "tag": "0004_right_marvel_zombies",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1757596322532,
+      "tag": "0005_first_groot",
+      "breakpoints": true
     }
   ]
 }
