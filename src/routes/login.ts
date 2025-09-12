@@ -1,38 +1,48 @@
-// Daniel30@gmail.com / 123456
-
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
 import { db } from '../database/client.ts'
-import { courses } from '../database/schema.ts'
+import { users } from '../database/schema.ts'
 import z from 'zod'
+import { eq } from 'drizzle-orm'
+import { verify } from 'argon2'
 
 export const loginRoute: FastifyPluginAsyncZod = async (server) => {
   server.post(
-    '/courses',
+    '/sessions',
     {
       schema: {
-        tags: ['courses'],
-        summary: 'Create a course',
+        tags: ['auth'],
+        summary: 'Login',
         description:
           'This route receive a title and create a course in the database',
         body: z.object({
-          title: z.string().min(5, 'Título precisa ter 5 caracteres'),
+          email: z.email(),
+          password: z.string(),
         }),
-        response: {
-          201: z
-            .object({ courseId: z.uuid() })
-            .describe('Course created successfully!'),
-        },
+        // response: {
+        //   201: z
+        //     .object({ courseId: z.uuid() })
+        //     .describe('Course created successfully!'),
+        // },
       },
     },
     async (request, reply) => {
-      const courseTitle = request.body.title
+      const { email, password } = request.body
 
-      const result = await db
-        .insert(courses)
-        .values({ title: courseTitle })
-        .returning()
+      const result = await db.select().from(users).where(eq(users.email, email))
 
-      return reply.status(201).send({ courseId: result[0].id })
+      if (result.length === 0) {
+        return reply.status(400).send({ message: 'Invalid credentials.' })
+      }
+
+      const user = result[0]
+
+      const doesPasswordsMatch = await verify(user.password, password)
+
+      if (!doesPasswordsMatch) {
+        return reply.status(400).send({ message: 'Invalid credentials.' })
+      }
+
+      return reply.status(200).send({ message: 'ok' })
     }
   )
 }

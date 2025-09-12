@@ -12,3 +12,13 @@ Content-Type: application/json
 {
   "title": "Curso de React Native"
 }
+
+###
+
+POST http://localhost:3333/sessions
+Content-Type: application/json
+
+{
+  "email": "Sarah.Braga91@yahoo.com",
+  "password": "123456"
+}
