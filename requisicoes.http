@@ -19,6 +19,6 @@ POST http://localhost:3333/sessions
 Content-Type: application/json
 
 {
-  "email": "Sarah.Braga91@yahoo.com",
+  "email": "Mariana.Pereira@gmail.com",
   "password": "123456"
 }
